@@ -77,14 +77,16 @@ class RefreshTranslation extends Command
     const FORMAT = 'yii2';
 
     /**
-     * Create a new command instance.
+     * Execute the console command.
      *
+     * @param null $webserverUser
+     * @return mixed
      * @throws \Exception
-     * @return void
      */
-    public function __construct()
+    public function handle($webserverUser = null)
     {
-        parent::__construct();
+        $this->_messageFilePath = resource_path() . '/lang';
+        $this->setMessageFileName();
 
         if (empty(config('translate.apikey'))) {
             throw new \Exception('The `apikey` property must be set!');
@@ -98,20 +100,6 @@ class RefreshTranslation extends Command
             throw new \Exception('The `message_category` property cannot be empty!');
         }
 
-        $this->_messageFilePath = resource_path() . '/lang';
-
-        $this->setMessageFileName();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @param null $webserverUser
-     * @return mixed
-     * @throws \Exception
-     */
-    public function handle($webserverUser = null)
-    {
         foreach (config('translate.language_codes') as $languageCode) {
             $contents = $this->download($languageCode);
 
