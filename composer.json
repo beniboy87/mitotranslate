@@ -10,7 +10,7 @@
     ],
     "keywords": ["Laravel", "Translate", "Mito"],
     "require": {
-        "illuminate/support": "~5",
+        "illuminate/support": "~6",
         "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
