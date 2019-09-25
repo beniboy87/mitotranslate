@@ -4,9 +4,14 @@ namespace Balazsbencs\Translate\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\VarDumper\VarDumper;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\CliDumper;
 
 class RefreshTranslation extends Command
 {
+    private static $_output = '';
+
     /**
      * The name and signature of the console command.
      *
@@ -31,7 +36,7 @@ class RefreshTranslation extends Command
      *
      * @var string
      */
-    private $_apiUrl = 'https://translate.mito.hu/';
+    private $_apiUrl = 'https://translate2.mito.hu/';
 
     /**
      * set `true` if you want to use the staging server
@@ -74,7 +79,7 @@ class RefreshTranslation extends Command
      */
     public $languageCodes = [];
 
-    const FORMAT = 'yii2';
+    const FORMAT = 'icu';
 
     /**
      * Execute the console command.
@@ -114,7 +119,6 @@ class RefreshTranslation extends Command
             }
             $filePath = $this->getMessageFilePath($languageCode);
 
-
             if (file_put_contents($filePath, $contents) === false) {
                 throw new \Exception('Unable to update "' . $languageCode . '" translations!');
             } else {
@@ -136,11 +140,7 @@ class RefreshTranslation extends Command
     public function download($languageCode)
     {
         $client = new \GuzzleHttp\Client();
-        $res = $client->request('POST', $this->getApiUrlToCall($languageCode), [
-            'form_params' => [
-                'token' => config('translate.apikey')
-            ]
-        ]);
+        $res = $client->request('GET', $this->getApiUrlToCall($languageCode));
         return $res->getStatusCode() === 200 ? $res->getBody()->getContents() : false;
     }
 
@@ -158,9 +158,8 @@ class RefreshTranslation extends Command
      */
     private function setMessageFileName()
     {
-        $this->_messageFileName = $this->messageCategory . '.php';
+        $this->_messageFileName = $this->messageCategory . '.json';
     }
-
 
     /**
      * @return string
@@ -176,6 +175,6 @@ class RefreshTranslation extends Command
      */
     public function getApiUrlToCall($languageCode)
     {
-        return $this->_apiUrl . 'app/export?' . http_build_query(['format' => self::FORMAT, 'languageCode' => $languageCode]);
+        return $this->_apiUrl . 'api/download?' . http_build_query(['format' => self::FORMAT, 'languageCode' => $languageCode, 'key' => config('translate.apikey')]);
     }
 }
