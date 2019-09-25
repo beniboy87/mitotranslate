@@ -1,5 +1,5 @@
 {
-    "name": "mito/laravel-translate",
+    "name": "beniboy87/mito-translate",
     "description": "Mito Translate language file downloader package for Laravel",
     "license": "MIT",
     "authors": [
@@ -21,21 +21,21 @@
     },
     "autoload": {
         "psr-4": {
-            "Mito\\Translate\\": "src/"
+            "Balazsbencs\\Translate\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Mito\\Translate\\Tests\\": "tests"
+            "Balazsbencs\\Translate\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Mito\\Translate\\TranslateServiceProvider"
+                "Balazsbencs\\Translate\\TranslateServiceProvider"
             ],
             "aliases": {
-                "Translate": "Mito\\Translate\\Facades\\Translate"
+                "Translate": "Balazsbencs\\Translate\\Facades\\Translate"
             }
         }
     }

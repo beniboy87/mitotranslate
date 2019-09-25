@@ -1,6 +1,6 @@
 <?php
 
-namespace Mito\Translate\Facades;
+namespace Balazsbencs\Translate\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

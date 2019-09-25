@@ -1,6 +1,6 @@
 <?php
 
-namespace Mito\Translate;
+namespace Balazsbencs\Translate;
 
 class Translate
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Mito\Translate;
+namespace Balazsbencs\Translate;
 
 use Illuminate\Support\ServiceProvider;
-use Mito\Translate\Console\Commands\RefreshTranslation;
+use Balazsbencs\Translate\Console\Commands\RefreshTranslation;
 
 class TranslateServiceProvider extends ServiceProvider
 {

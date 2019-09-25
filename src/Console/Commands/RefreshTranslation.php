@@ -1,6 +1,6 @@
 <?php
 
-namespace Mito\Translate\Console\Commands;
+namespace Balazsbencs\Translate\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
