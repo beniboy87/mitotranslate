@@ -118,9 +118,8 @@ class RefreshTranslation extends Command
                 File::makeDirectory($languagePath);
             }
             $filePath = $this->getMessageFilePath($languageCode);
-            $arrayToSave = $this->convertToMessageFileContent(json_decode($contents, true));
 
-            if (file_put_contents($filePath, $arrayToSave) === false) {
+            if (file_put_contents($filePath, $contents) === false) {
                 throw new \Exception('Unable to update "' . $languageCode . '" translations!');
             } else {
                 if ($webserverUser && !@chgrp($filePath, $webserverUser)) {
@@ -242,7 +241,7 @@ EOD;
      */
     private function setMessageFileName()
     {
-        $this->_messageFileName = $this->messageCategory . '.php';
+        $this->_messageFileName = $this->messageCategory . '.json';
     }
 
 
