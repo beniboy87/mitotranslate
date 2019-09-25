@@ -1,0 +1,42 @@
+{
+    "name": "mito/laravel-translate",
+    "description": "Mito Translate language file downloader package for Laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bencs Balázs",
+            "email": "b.bencs@mito.hu"
+        }
+    ],
+    "keywords": ["Laravel", "Translate", "Mito"],
+    "require": {
+        "illuminate/support": "~5",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "~3.0",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mito\\Translate\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mito\\Translate\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mito\\Translate\\TranslateServiceProvider"
+            ],
+            "aliases": {
+                "Translate": "Mito\\Translate\\Facades\\Translate"
+            }
+        }
+    }
+}
